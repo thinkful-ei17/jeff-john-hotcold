@@ -14,4 +14,4 @@ export default function GuessList(props) {
             {guesses}
         </ul>
     );
-};
+}; 

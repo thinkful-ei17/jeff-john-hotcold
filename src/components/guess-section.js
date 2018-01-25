@@ -5,12 +5,14 @@ import GuessForm from './guess-form';
 import './guess-section.css';
 
 export default function GuessSection(props) {
+    
     return (
         <section>
-            <h2 id="feedback">{props.feedback}</h2>
-    <GuessForm {props.onInputText}
-            }} />
+        <h2 id="feedback">{props.feedback}</h2>
+        <GuessForm getUserInput={value => props.getUserInput(value)} getButtonInput={value => props.getButtonInput(value)} 
+        />
         </section>
     );
 }
+
 

@@ -18,14 +18,26 @@ export default  class Game extends React.Component{
         };
     }
 
+    onUserInput(value) {
+        if (this.state.recentGuess !== this.state.currentGuess)
+        this.setState({
+            recentGuess: this.state.currentGuess
+        })
+    }
+
     render(){
+        console.log(this.state.recentGuess);
+
         return (
             <div>
                 <Header />
-                <GuessSection getInputText={value => {
-                    // this.onTextInput(value) 
-                    console.log(value)
-                    }} feedback="Make your guess!" />
+                <GuessSection 
+                
+                getUserInput={value => this.setState({currentGuess: value})} 
+
+                getButtonInput={value => this.onUserInput(value) }
+                
+                feedback="Make your guess!" />
                 <GuessCount count={this.state.oldGuesses.length + 1} />
                 <GuessList guesses={[10, 15, 25]} />
             </div>
@@ -33,4 +45,3 @@ export default  class Game extends React.Component{
 
     }
 }
-

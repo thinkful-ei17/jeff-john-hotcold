@@ -9,7 +9,7 @@ export default function GuessSection(props) {
     return (
         <section>
         <h2 id="feedback">{props.feedback}</h2>
-        <GuessForm getUserInput={value => props.getUserInput(value)} getButtonInput={value => props.getButtonInput(value)} 
+        <GuessForm onUserInput={()=> props.onUserInput()} getUserInput={value => props.getUserInput(value)} getButtonInput={value => props.getButtonInput(value)} 
         />
         </section>
     );

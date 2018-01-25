@@ -20,7 +20,7 @@ export default  class Game extends React.Component{
 
     Restart(){
         this.setState({
-                feedback: null,
+                feedback: 'Make Your Guess',
                 recentGuess:null,
                 oldGuesses: [],
                 currentGuess: null,

@@ -3,6 +3,8 @@ import Header from './header';
 import GuessSection from './guess-section';
 import GuessCount  from './guess-count';
 import GuessList from './guess-list';
+import InfoModal from './info-modal';
+
 
 
 export default  class Game extends React.Component{
@@ -14,7 +16,8 @@ export default  class Game extends React.Component{
             oldGuesses: [],
             feedback: 'Make Your Guess',
             feedbackOptions: ['Hot','Warm','Kinda Hot','Cold'],
-            correct: Math.round(Math.random() * 100)
+            correct: Math.round(Math.random() * 100),
+            showModal: false
         };
     };
 
@@ -29,7 +32,7 @@ export default  class Game extends React.Component{
     }
 
     onUserInput(value) {
-        const results = [...this.state.oldGuesses,' ',this.state.currentGuess];
+        const results = [...this.state.oldGuesses,this.state.currentGuess];
         if (this.state.recentGuess !== this.state.currentGuess){
             this.setState({
                 oldGuesses: results,
@@ -61,10 +64,25 @@ export default  class Game extends React.Component{
         }
     }
 
+    instructionClick(event) {
+        console.log('clicked');
+        this.setState({
+          showModal: true
+        });
+      }
+
+      normalStateClick(event) {
+        console.log('clicked');
+        this.setState({
+          showModal: false
+      });
+      }
+
     render(){
+
         return (
             <div>
-                <Header Restart={()=> this.Restart()} />
+                <Header Restart={()=> this.Restart()} instructionClick={value => this.instructionClick()} showModal={this.state.showModal} normalStateClick={value => this.normalStateClick()}/>
                 <GuessSection 
                 onUserInput={()=> this.onUserInput()}
                 getUserInput={value => this.setState({currentGuess: value})} 
@@ -72,8 +90,9 @@ export default  class Game extends React.Component{
                 
                 feedback={this.state.feedback} />
                 <GuessCount count={this.state.oldGuesses.length} />
-                <GuessList guesses={[this.state.oldGuesses]} />
+                <GuessList guesses={this.state.oldGuesses} />
             </div>
+
         );
     }
 }

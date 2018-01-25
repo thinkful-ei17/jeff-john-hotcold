@@ -10,6 +10,7 @@ ul.guessBox {
 	color: #fff;
 	overflow: auto;
 }
+
 ul.guessBox li {
 	display: inline;
 	background-color: #1a4e95;

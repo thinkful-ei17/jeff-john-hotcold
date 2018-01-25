@@ -9,7 +9,6 @@ export default function GuessForm(props) {
                 className="text" maxLength="3" min='1' max='100' autoComplete="off"
                 placeholder="Enter your Guess"  required />
             <input onClick={(e) => {
-                
                 props.getButtonInput(e.currentTarget.value)
             }
             }

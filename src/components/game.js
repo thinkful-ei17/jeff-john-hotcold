@@ -6,7 +6,6 @@ import GuessList from './guess-list';
 import InfoModal from './info-modal';
 
 
-
 export default  class Game extends React.Component{
     constructor(props) {
         super(props);
@@ -21,16 +20,6 @@ export default  class Game extends React.Component{
         };
     };
 
-    Restart(){
-        this.setState({
-                feedback: 'Make Your Guess',
-                recentGuess:null,
-                oldGuesses: [],
-                currentGuess: null,
-                correct: Math.round(Math.random() * 100)
-            })
-    }
-
     onUserInput(value) {
         const results = [...this.state.oldGuesses,this.state.currentGuess];
         if (this.state.recentGuess !== this.state.currentGuess){
@@ -38,12 +27,17 @@ export default  class Game extends React.Component{
                 oldGuesses: results,
                 recentGuess: this.state.currentGuess
         });
+        this.checkUserAnswer();
+        }
+    }
+
+    checkUserAnswer() {
         let difference = Math.abs(this.state.currentGuess - this.state.correct);
         console.log(this.state.correct);
         if(difference <= 0){
             this.setState({
                 feedback: 'YOU WIN!'
-            })     
+            }) 
         }else if(difference <=10){
             this.setState({
                 feedback: this.state.feedbackOptions[0]
@@ -61,7 +55,6 @@ export default  class Game extends React.Component{
                 feedback: this.state.feedbackOptions[3]
             }) 
         }
-        }
     }
 
     instructionClick(event) {
@@ -78,6 +71,16 @@ export default  class Game extends React.Component{
       });
       }
 
+      Restart(){
+        this.setState({
+                feedback: 'Make Your Guess',
+                recentGuess:null,
+                oldGuesses: [],
+                currentGuess: null,
+                correct: Math.round(Math.random() * 100)
+        })
+    }
+
     render(){
 
         return (
@@ -87,7 +90,6 @@ export default  class Game extends React.Component{
                 onUserInput={()=> this.onUserInput()}
                 getUserInput={value => this.setState({currentGuess: value})} 
                 getButtonInput={value => this.onUserInput(value) }
-                
                 feedback={this.state.feedback} />
                 <GuessCount count={this.state.oldGuesses.length} />
                 <GuessList guesses={this.state.oldGuesses} />
